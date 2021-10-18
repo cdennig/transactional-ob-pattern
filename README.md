@@ -23,11 +23,14 @@ You can find a bicep file that will take care of creating these resources (and t
 To run the deployment script, open a Powershell or Bash prompt **in the `Deployment` folder** an run:
 
 ```shell
-az group create -n rg-transact-ob -l westeurope
+export RESOURCE_GROUP=<resource-group-name>
+export LOCATION=<azure-region>
 
-az deployment group create -f deploy.bicep -g rg-transact-ob -o none
+az group create -n $RESOURCE_GROUP -l $LOCATION
 
-az deployment group show -g rg-transact-ob -n deploy --query properties.outputs
+az deployment group create -f deploy.bicep -g $RESOURCE_GROUP -o none
+
+az deployment group show -g $RESOURCE_GROUP -n deploy --query properties.outputs
 ```
 
 The last command will output the relevant parameters that you need to adjust in:
