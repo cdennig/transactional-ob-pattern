@@ -248,6 +248,60 @@ public static void Run(string mySbMsg, ILogger log)
   ]
 }
 
+resource appServicePlan 'Microsoft.Web/serverfarms@2021-01-01' = {
+  name: 'appservice-tobp-${uniqueString(resourceGroup().id)}'
+  location: location
+  sku: {
+    name: 'S1'
+    capacity: 1
+  }
+}
+
+resource appService 'Microsoft.Web/sites@2021-01-01' = {
+  name: 'webapp-tobp-${uniqueString(resourceGroup().id)}'
+  location: location
+  properties: {
+    serverFarmId: appServicePlan.id
+    httpsOnly: false
+    siteConfig: {
+      alwaysOn: true
+      use32BitWorkerProcess: false
+      cors: {
+        allowedOrigins: [
+          '*'
+        ]
+      }
+      appSettings: [
+        {
+          name: 'Cosmos:Url'
+          value: 'https://${cosmosDbAccount.name}.documents.azure.com:443/'
+        }
+        {
+          name: 'Cosmos:Key'
+          value: listKeys('${cosmosDbAccount.id}', cosmosDbAccount.apiVersion).primaryMasterKey
+        }
+        {
+          name: 'Cosmos:Db'
+          value: 'tobp'
+        }
+        {
+          name: 'Cosmos:Container'
+          value: 'data'
+        }
+        {
+          name: 'Events:Ttl'
+          value: '864000'
+        }
+      ]
+    }
+  }
+
+  dependsOn: [
+    appServicePlan
+    cosmosDbAccount
+  ]
+}
+
 output sbConnectionString string = listKeys('${sb.id}/AuthorizationRules/RootManageSharedAccessKey', sb.apiVersion).primaryConnectionString
 output sbTopicName string = 'sbt-contacts'
 output cosmosUri string = 'https://${cosmosDbAccount.name}.documents.azure.com:443/'
