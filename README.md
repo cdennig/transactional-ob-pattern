@@ -4,7 +4,7 @@ This sample application consists of a "Contacts" API and an event processor that
 
 The source code is structured as follows:
 
-- **Contacts.Domain** - Contact Domain logic and interfaces
+- **Contacts.Domain** - Contact domain logic and interfaces
 - **Contacts.Infrastructure** - Implementation of domain interfaces like repositories
 - **Contacts.Application** - Implementation of CQRS pattern using MediatR library, validation and mapping logic
 - **Contacts.API** - RESTful API consuming application logic components
@@ -12,7 +12,7 @@ The source code is structured as follows:
 
 ## Prerequisites
 
-In order to run the sample application on your local machine, you need to have the following components installed:
+To run the sample application on your local machine, you need to have the following components installed:
 
 - [.NET Core 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0)
 - [Visual Studio Code](https://code.visualstudio.com/download)
@@ -25,7 +25,7 @@ You also need to create some Azure resources:
 
 You can find a bicep file that will take care of creating these resources (and their dependencies) under [Deployment/deploy.bicep](Deployment/deploy.bicep).
 
-To run the deployment script, open an [Azure Cloud Shell](https://shell.azure.com), clone this repository to your environment, switch **to the `Deployment` folder** an run:
+To run the deployment script, open an [Azure Cloud Shell](https://shell.azure.com), clone this repository to your environment, switch **to the `Deployment` folder** and run:
 
 ```shell
 export RESOURCE_GROUP=<resource-group-name> # name for your resource group
@@ -38,7 +38,7 @@ az deployment group create -f deploy.bicep -g $RESOURCE_GROUP -o none
 az deployment group show -g $RESOURCE_GROUP -n deploy --query properties.outputs
 ```
 
-The last command will output the relevant parameters that you need to replace in:
+The last command will output the relevant parameters that you need to replace in the following files:
 
 - [Contacts.API/appsettings.json](Contacts.API/appsettings.json)
 - [Contacts.EventsProcessor/appsettings.json](Contacts.EventsProcessor/appsettings.json)
@@ -49,7 +49,9 @@ Your Azure resource group should look like this:
 
 ## Run the API and Events Processor locally
 
-After adjusting the appsettings parameters, you can run the `Contacts.API` and `Contacts.EventProcessor` applications **locally**. If you are using VS Code, there are predefined debug configurations, to run both projects.
+After adjusting the appsettings parameters, you can run the `Contacts.API` and `Contacts.EventProcessor` applications on your machine.
+
+> If you are using VS Code, there are predefined debug configurations to build and execute both projects. Just go to the "Debug" view and run both configurations.
 
 When the API and the events processor console app are running, you can open a browser at https://localhost:5001/swagger/index.html (serving the Swagger UI).
 
@@ -72,6 +74,8 @@ As soon as you add (or later update) contacts, you'll see events being published
 When you look at the Cosmos DB container, you'll find two documents for the create operation (a `Contact` object and the corresponding domain event):
 
 ![Comsos DB container](Images/cosmos_contact.png "Data container in Comsos DB after a successful create operation.")
+
+> **Tip**: The Time-To-Live attribute for event documents is currently set to `36000` seconds. That means those documents will be deleted automatically after 10 hours. If you want to adjust the parameter to see how the documents will be cleaned up, go to [Contacts.API/appsettings.json](Contacts.API/appsettings.json) file and set a lower value for `Events.Ttl` (e.g. `120` seconds).
 
 ## Clean-Up
 
