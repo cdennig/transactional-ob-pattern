@@ -24,11 +24,11 @@ namespace Contacts.Tests
             var mediator = _fixture.Provider.GetService<IMediator>();
             var res = await mediator.Send(new CreateContactCommand
                 {
-                    FirstName = "Bertram",
-                    LastName = "Gilfoyle",
-                    Email = "bg@piedpiper.com",
+                    FirstName = "John",
+                    LastName = "Doe",
+                    Email = "jd@example.com",
                     Description = "",
-                    CompanyName = "Pied Piper"
+                    CompanyName = "Example"
                 }
             );
             Assert.NotNull(res);
@@ -56,7 +56,7 @@ namespace Contacts.Tests
                 {
                     Id = Guid.NewGuid(),
                     Etag = null,
-                    CompanyName = "Hooli",
+                    CompanyName = "NewComp",
                     Street = "Street",
                     HouseNumber = "232",
                     PostalCode = "12312",
@@ -93,7 +93,7 @@ namespace Contacts.Tests
                 {
                     Id = Guid.NewGuid(),
                     Etag = null,
-                    Email = "bg@pp.com"
+                    Email = "jd@ex.com"
                 });
             Assert.NotNull(res);
             Assert.NotEqual(res.Id, Guid.Empty);
@@ -109,8 +109,8 @@ namespace Contacts.Tests
                 {
                     Id = Guid.NewGuid(),
                     Etag = null,
-                    FirstName = "Dinesh",
-                    LastName = "Chugtai"
+                    FirstName = "Jim",
+                    LastName = "Stark"
                 });
             Assert.NotNull(res);
             Assert.NotEqual(res.Id, Guid.Empty);

@@ -21,13 +21,13 @@ namespace Contacts.Tests.TestInfra
             _jsonObject = @"
                 {
                     ""name"": {
-                        ""firstName"": ""Bertram"",
-                        ""lastName"": ""Gilfoyle""
+                        ""firstName"": ""John"",
+                        ""lastName"": ""Doe""
                     },
                     ""description"": ""This is a description"",
-                    ""email"": ""bg@piedpiper.com"",
+                    ""email"": ""jd@example.com"",
                     ""company"": {
-                        ""companyName"": ""Pied Piper"",
+                        ""companyName"": ""Example"",
                         ""street"": ""Street"",
                         ""houseNumber"": ""1a"",
                         ""postalCode"": ""092821"",

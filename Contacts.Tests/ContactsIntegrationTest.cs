@@ -29,10 +29,10 @@ namespace Contacts.Tests
             var uow = _fixture.Provider.GetService<IUnitOfWork>();
 
             var c = Contact.CreateNew(_fixture.CurrentId);
-            c.SetCompany("Pied Piper", "Street", "1a", "092821", "Palo Alto", "US");
+            c.SetCompany("Example", "Street", "1a", "092821", "Palo Alto", "US");
             c.SetDescription("This is a contact");
-            c.SetEmail("bg@piedpiper.com");
-            c.SetName("Bertram", "Gilfoyle");
+            c.SetEmail("jd@example.com");
+            c.SetName("John", "Doe");
             if (uow != null)
             {
                 uow.ContactsRepo.Create(c);
@@ -61,7 +61,7 @@ namespace Contacts.Tests
             {
                 var (contact, etag) = await uow.ContactsRepo.ReadAsync(_fixture.CurrentId, null);
 
-                contact.SetCompany("Hooli", contact.Company.Street, contact.Company.HouseNumber,
+                contact.SetCompany("NewComp", contact.Company.Street, contact.Company.HouseNumber,
                     contact.Company.PostalCode, contact.Company.City, contact.Company.Country);
 
                 uow.ContactsRepo.Update(contact, etag);
@@ -78,7 +78,7 @@ namespace Contacts.Tests
             {
                 var (contact, etag) = await uow.ContactsRepo.ReadAsync(_fixture.CurrentId, null);
 
-                contact.SetName("Dinesh", "Chugtai");
+                contact.SetName("Jim", "Stark");
 
                 uow.ContactsRepo.Update(contact, etag);
                 var res = await uow.CommitAsync();
@@ -110,7 +110,7 @@ namespace Contacts.Tests
             {
                 var (contact, etag) = await uow.ContactsRepo.ReadAsync(_fixture.CurrentId, null);
 
-                contact.SetEmail("bg@pp.com");
+                contact.SetEmail("jd@ex.com");
 
                 uow.ContactsRepo.Update(contact, etag);
                 var res = await uow.CommitAsync();
@@ -144,10 +144,10 @@ namespace Contacts.Tests
             var ctx = _fixture.Provider.GetService<IContainerContext>();
 
             var c = Contact.CreateNew(_fixture.CurrentId);
-            c.SetCompany("Pied Piper", "Street", "1a", "092821", "Palo Alto", "US");
+            c.SetCompany("Example", "Street", "1a", "092821", "Palo Alto", "US");
             c.SetDescription("This is a contact");
-            c.SetEmail("bg@piedpiper.com");
-            c.SetName("Bertram", "Gilfoyle");
+            c.SetEmail("jd@example.com");
+            c.SetName("John", "Doe");
             if (ctx != null && uow != null)
             {
                 uow.ContactsRepo.Create(c);
@@ -177,13 +177,13 @@ namespace Contacts.Tests
             var jObj = @"
                 {
                     ""name"": {
-                        ""firstName"": ""Bertram"",
-                        ""lastName"": ""Gilfoyle""
+                        ""firstName"": ""John"",
+                        ""lastName"": ""Doe""
                     },
                     ""description"": ""This is a description"",
-                    ""email"": ""bg@piedpiper.com"",
+                    ""email"": ""jd@example.com"",
                     ""company"": {
-                        ""companyName"": ""Pied Piper"",
+                        ""companyName"": ""Example"",
                         ""street"": ""Street"",
                         ""houseNumber"": ""1a"",
                         ""postalCode"": ""092821"",
@@ -211,13 +211,13 @@ namespace Contacts.Tests
             var jObj = @"
                 {
                     ""name"": {
-                        ""firstName"": ""Bertram"",
-                        ""lastName"": ""Gilfoyle""
+                        ""firstName"": ""John"",
+                        ""lastName"": ""Doe""
                     },
                     ""description"": ""This is a description"",
-                    ""email"": ""bg@piedpiper.com"",
+                    ""email"": ""jd@example.com"",
                     ""company"": {
-                        ""companyName"": ""Pied Piper"",
+                        ""companyName"": ""Example"",
                         ""street"": ""Street"",
                         ""houseNumber"": ""1a"",
                         ""postalCode"": ""092821"",
@@ -245,13 +245,13 @@ namespace Contacts.Tests
             var jObj = @"
                 {
                     ""name"": {
-                        ""firstName"": ""Bertram"",
-                        ""lastName"": ""Gilfoyle""
+                        ""firstName"": ""John"",
+                        ""lastName"": ""Doe""
                     },
                     ""description"": ""This is a description"",
-                    ""email"": ""bg@piedpiper.com"",
+                    ""email"": ""jd@example.com"",
                     ""company"": {
-                        ""companyName"": ""Pied Piper"",
+                        ""companyName"": ""Example"",
                         ""street"": ""Street"",
                         ""houseNumber"": ""1a"",
                         ""postalCode"": ""092821"",
@@ -298,7 +298,7 @@ namespace Contacts.Tests
             {
                 var (contact, etag) = await uow.ContactsRepo.ReadAsync(_fixture.CurrentId, null);
 
-                contact.SetCompany("Hooli", contact.Company.Street, contact.Company.HouseNumber,
+                contact.SetCompany("NewComp", contact.Company.Street, contact.Company.HouseNumber,
                     contact.Company.PostalCode, contact.Company.City, contact.Company.Country);
 
                 // use wrong etag -- provoke mid-air collision
@@ -330,13 +330,13 @@ namespace Contacts.Tests
             const string jObj = @"
                 {
                     ""name"": {
-                        ""firstName"": ""Bertram"",
-                        ""lastName"": ""Gilfoyle""
+                        ""firstName"": ""John"",
+                        ""lastName"": ""Doe""
                     },
                     ""description"": ""This is a description"",
-                    ""email"": ""bg@piedpiper.com"",
+                    ""email"": ""jd@example.com"",
                     ""company"": {
-                        ""companyName"": ""Pied Piper"",
+                        ""companyName"": ""Example"",
                         ""street"": ""Street"",
                         ""houseNumber"": ""1a"",
                         ""postalCode"": ""092821"",
@@ -371,13 +371,13 @@ namespace Contacts.Tests
             const string jObj = @"
                 {
                     ""name"": {
-                        ""firstName"": ""Bertram"",
-                        ""lastName"": ""Gilfoyle""
+                        ""firstName"": ""John"",
+                        ""lastName"": ""Doe""
                     },
                     ""description"": ""This is a description"",
-                    ""email"": ""bg@piedpiper.com"",
+                    ""email"": ""jd@example.com"",
                     ""company"": {
-                        ""companyName"": ""Pied Piper"",
+                        ""companyName"": ""Example"",
                         ""street"": ""Street"",
                         ""houseNumber"": ""1a"",
                         ""postalCode"": ""092821"",
@@ -413,13 +413,13 @@ namespace Contacts.Tests
             const string jObj = @"
                 {
                     ""name"": {
-                        ""firstName"": ""Bertram"",
-                        ""lastName"": ""Gilfoyle""
+                        ""firstName"": ""John"",
+                        ""lastName"": ""Doe""
                     },
                     ""description"": ""This is a description"",
-                    ""email"": ""bg@piedpiper.com"",
+                    ""email"": ""jd@example.com"",
                     ""company"": {
-                        ""companyName"": ""Pied Piper"",
+                        ""companyName"": ""Example"",
                         ""street"": ""Street"",
                         ""houseNumber"": ""1a"",
                         ""postalCode"": ""092821"",
@@ -456,13 +456,13 @@ namespace Contacts.Tests
             var jObj = @"
                 {
                     ""name"": {
-                        ""firstName"": ""Bertram"",
-                        ""lastName"": ""Gilfoyle""
+                        ""firstName"": ""John"",
+                        ""lastName"": ""Doe""
                     },
                     ""description"": ""This is a description"",
-                    ""email"": ""bg@piedpiper.com"",
+                    ""email"": ""jd@example.com"",
                     ""company"": {
-                        ""companyName"": ""Pied Piper"",
+                        ""companyName"": ""Example"",
                         ""street"": ""Street"",
                         ""houseNumber"": ""1a"",
                         ""postalCode"": ""092821"",
@@ -497,13 +497,13 @@ namespace Contacts.Tests
             var jObj = @"
                 {
                     ""name"": {
-                        ""firstName"": ""Bertram"",
-                        ""lastName"": ""Gilfoyle""
+                        ""firstName"": ""John"",
+                        ""lastName"": ""Doe""
                     },
                     ""description"": ""This is a description"",
-                    ""email"": ""bg@piedpiper.com"",
+                    ""email"": ""jd@example.com"",
                     ""company"": {
-                        ""companyName"": ""Pied Piper"",
+                        ""companyName"": ""Example"",
                         ""street"": ""Street"",
                         ""houseNumber"": ""1a"",
                         ""postalCode"": ""092821"",
@@ -538,13 +538,13 @@ namespace Contacts.Tests
             const string jObj = @"
                 {
                     ""name"": {
-                        ""firstName"": ""Bertram"",
-                        ""lastName"": ""Gilfoyle""
+                        ""firstName"": ""John"",
+                        ""lastName"": ""Doe""
                     },
                     ""description"": ""This is a description"",
-                    ""email"": ""bg@piedpiper.com"",
+                    ""email"": ""jd@example.com"",
                     ""company"": {
-                        ""companyName"": ""Pied Piper"",
+                        ""companyName"": ""Example"",
                         ""street"": ""Street"",
                         ""houseNumber"": ""1a"",
                         ""postalCode"": ""092821"",
@@ -575,10 +575,10 @@ namespace Contacts.Tests
             var uow = _fixture.Provider.GetService<IUnitOfWork>();
 
             var c = Contact.CreateNew(_fixture.CurrentId);
-            c.SetCompany("Pied Piper", "Street", "1a", "092821", "Palo Alto", "US");
+            c.SetCompany("Example", "Street", "1a", "092821", "Palo Alto", "US");
             c.SetDescription("This is a contact");
-            c.SetEmail("bg@piedpiper.com");
-            c.SetName("Bertram", "Gilfoyle");
+            c.SetEmail("jd@example.com");
+            c.SetName("John", "Doe");
             if (uow != null)
             {
                 uow.ContactsRepo.Create(c);
@@ -595,10 +595,10 @@ namespace Contacts.Tests
             var uow = _fixture.Provider.GetService<IUnitOfWork>();
             var id = Guid.NewGuid();
             var c = Contact.CreateNew(id);
-            c.SetCompany("Pied Piper", "Street", "1a", "092821", "Palo Alto", "US");
+            c.SetCompany("Example", "Street", "1a", "092821", "Palo Alto", "US");
             c.SetDescription("This is a contact");
-            c.SetEmail("bg@piedpiper.com");
-            c.SetName("Bertram", "Gilfoyle");
+            c.SetEmail("jd@example.com");
+            c.SetName("John", "Doe");
             if (uow != null)
             {
                 uow.ContactsRepo.Create(c);
