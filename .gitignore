@@ -2,5 +2,4 @@
 .idea/**
 **/obj/**
 *.sln.DotSettings.user
-test_appsettings.json
 **/publish
