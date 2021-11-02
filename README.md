@@ -1,4 +1,8 @@
-# Sample implementation of the Transactional Outbox Pattern with Cosmos DB
+# ARCHIVED - Sample implementation of the Transactional Outbox Pattern with Cosmos DB - ARCHIVED
+
+THIS REPO HAS MOVED!! --> <https://github.com/mspnp/transactional-outbox-pattern>
+
+<br>
 
 This sample application consists of a "Contacts" API and an event processor that reads a Cosmos DB Change Feed and publishes domain events to an Azure Service Bus. The sample demonstrates how to use the **Transactional Outbox Pattern** in combination with **Azure Cosmos DB** to implement **reliable/guaranteed messaging** in your microservice-oriented application.
 
