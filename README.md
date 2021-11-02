@@ -1,6 +1,6 @@
 # ARCHIVED - Sample implementation of the Transactional Outbox Pattern with Cosmos DB - ARCHIVED
 
-THIS REPO HAS MOVED!! --> <https://github.com/mspnp/transactional-outbox-pattern>
+⚠️ **THIS REPO HAS MOVED!!** ⚠️ --> <https://github.com/mspnp/transactional-outbox-pattern>
 
 <br>
 
